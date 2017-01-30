@@ -1,6 +1,6 @@
 import logging
 
-from graphitesend.graphitesend import GraphiteClient
+from graphitesend.graphitesend import GraphiteClient, GraphiteSendException
 
 logger = logging.getLogger("flask-graphite")
 
@@ -15,8 +15,12 @@ class FlaskGraphite(object):
     def init_app(self, app):
         logger.info("configuring %s", app.name)
         self.make_config(app)
-        self.setup_graphitesend()
-        logger.info("application %s successfully configured")
+        try:
+            self.setup_graphitesend()
+        except GraphiteSendException:
+            logger.error("Failed to setup Graphite client")
+        else:
+            logger.info("application %s successfully configured", app.name)
 
     def make_config(self, app, namespace=None):
         application_config = app.config.get_namespace("FLASK_GRAPHITE_")
