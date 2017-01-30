@@ -1,8 +1,15 @@
 import logging
+import time
+
+from flask import request
 
 from graphitesend.graphitesend import GraphiteClient, GraphiteSendException
 
 logger = logging.getLogger("flask-graphite")
+
+
+def set_start_time():
+    request.start_time = time.time()
 
 
 class FlaskGraphite(object):
@@ -17,6 +24,7 @@ class FlaskGraphite(object):
         self.make_config(app)
         try:
             self.setup_graphitesend()
+            self.setup_request_hooks(app)
         except GraphiteSendException:
             logger.error("Failed to setup Graphite client")
         else:
@@ -37,3 +45,6 @@ class FlaskGraphite(object):
         port = carbon_config.pop("port")
         self.client = GraphiteClient(graphite_server=host, graphite_port=port,
                                      **carbon_config)
+
+    def setup_request_hooks(self, app):
+        app.before_request(set_start_time)
