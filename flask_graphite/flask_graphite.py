@@ -1,8 +1,8 @@
 import logging
+import functools
 import time
 
 from flask import request
-
 from graphitesend.graphitesend import GraphiteClient, GraphiteSendException
 from werkzeug.routing import _rule_re
 
@@ -18,6 +18,12 @@ def get_request_metric_prefix():
 
 def set_start_time():
     request.start_time = time.time()
+
+
+def request_processing_time(exception):
+    metric_prefix = get_request_metric_prefix()
+    metric = metric_prefix + ".pt"
+    return metric, time.time() - request.start_time
 
 
 class FlaskGraphite(object):
@@ -54,5 +60,24 @@ class FlaskGraphite(object):
         self.client = GraphiteClient(graphite_server=host, graphite_port=port,
                                      **carbon_config)
 
+    def send_wrapped(self, metric, value):
+        try:
+            self.client.send(metric, value)
+        except GraphiteSendException:
+            logger.error("Couldn't send metric %s with value %d", metric,
+                         value)
+
+    def wrap_request_hook(self, function):
+        @functools.wraps(function)
+        def request_hook(exception):
+            # shiro: before_request may not be executed, see the 4th point of
+            # http://flask.pocoo.org/docs/0.10/reqcontext/#callbacks-and-errors
+            if not hasattr(request, "start_time"):
+                logger.warning("request doesn't have a start_time attribute")
+            metric, value = function(exception)
+            self.send_wrapped(metric, value)
+        return request_hook
+
     def setup_request_hooks(self, app):
         app.before_request(set_start_time)
+        app.teardown_request(self.wrap_request_hook(request_processing_time))
