@@ -32,6 +32,13 @@ def request_count(exception):
     return metric, 1
 
 
+def request_status_code(response)
+    status_code = response.status_code
+    metric_prefix = get_request_metric_prefix()
+    metric = metric_prefix + ".status_code.{}".format(status_code)
+    return metric, 1
+
+
 class FlaskGraphite(object):
 
     def __init__(self, app=None):
@@ -88,3 +95,4 @@ class FlaskGraphite(object):
         app.before_request(set_start_time)
         app.teardown_request(self.wrap_request_hook(request_processing_time))
         app.teardown_request(self.wrap_request_hook(request_count))
+        app.after_request(self.wrap_request_hook(request_status_code))
