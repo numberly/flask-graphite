@@ -21,6 +21,11 @@ def set_start_time():
 
 
 def request_processing_time(exception):
+    # shiro: before_request may not be executed, see the 4th point of
+    # http://flask.pocoo.org/docs/0.10/reqcontext/#callbacks-and-errors
+    if not hasattr(request, "start_time"):
+        logger.warning("request doesn't have a start_time attribute")
+
     metric_prefix = get_request_metric_prefix()
     metric = metric_prefix + ".pt"
     return metric, time.time() - request.start_time
@@ -83,10 +88,6 @@ class FlaskGraphite(object):
     def wrap_request_hook(self, function):
         @functools.wraps(function)
         def request_hook(exception):
-            # shiro: before_request may not be executed, see the 4th point of
-            # http://flask.pocoo.org/docs/0.10/reqcontext/#callbacks-and-errors
-            if not hasattr(request, "start_time"):
-                logger.warning("request doesn't have a start_time attribute")
             metric, value = function(exception)
             self.send_wrapped(metric, value)
         return request_hook
