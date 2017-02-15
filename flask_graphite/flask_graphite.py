@@ -26,6 +26,12 @@ def request_processing_time(exception):
     return metric, time.time() - request.start_time
 
 
+def request_count(exception):
+    metric_prefix = get_request_metric_prefix()
+    metric = metric_prefix + ".count"
+    return metric, 1
+
+
 class FlaskGraphite(object):
 
     def __init__(self, app=None):
@@ -81,3 +87,4 @@ class FlaskGraphite(object):
     def setup_request_hooks(self, app):
         app.before_request(set_start_time)
         app.teardown_request(self.wrap_request_hook(request_processing_time))
+        app.teardown_request(self.wrap_request_hook(request_count))
