@@ -37,7 +37,7 @@ class Hook(object):
             registering_method = getattr(obj, self.type)
         except AttributeError:
             logger.error("Invalid type \"%s\". Couldn't register \"%s\" "
-                              "hook into %s.", self.type, self.name, obj)
+                         "hook into %s.", self.type, self.name, obj)
             raise
         return registering_method(self)
 
