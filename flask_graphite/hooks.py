@@ -39,7 +39,7 @@ class Hook(object):
             logger.error("Invalid type \"%s\". Couldn't register \"%s\" "
                               "hook into %s.", self.type, self.name, obj)
             raise
-        return registering_method(self.function)
+        return registering_method(self)
 
     def setup(self, function):
         """Mark a function as a setup hook for this hook
