@@ -30,3 +30,20 @@ def test_hook_decorator():
         pass
 
     assert isinstance(foo, Hook)
+
+
+def test_hook_setup(mocked_app, dumb):
+    hook = Hook(dumb)
+    hook.setup(dumb)
+    hook.register_into(mocked_app)
+    assert mocked_app.before_request.called
+
+
+def test_hook_setup_decorator(mocked_app, dumb):
+    hook = Hook(dumb)
+
+    @hook.setup
+    def foo():
+        pass
+
+    assert isinstance(foo, Hook)

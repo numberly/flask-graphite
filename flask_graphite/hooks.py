@@ -10,6 +10,7 @@ class Hook(object):
 
     def __init__(self, function, type="after_request"):
         self.function = function
+        self.setup_hook = None
         self.type = type
 
     def __call__(self, *args, **kwargs):
@@ -21,5 +22,18 @@ class Hook(object):
 
         :param obj: Either an application or a blueprint
         """
+        if self.setup_hook:
+            self.setup_hook.register_into(obj)
         registering_method = getattr(obj, self.type)
         return registering_method(self.function)
+
+    def setup(self, function):
+        """Mark a function as a setup hook for this hook
+
+        A setup hook is a hook required to run before its main hook. It's
+        implemented as a before_request hook.
+
+        :param function: The function used as setup hook
+        """
+        self.setup_hook = Hook(function, type="before_request")
+        return self.setup_hook
