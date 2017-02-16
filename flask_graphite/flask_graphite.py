@@ -2,6 +2,8 @@ import logging
 
 from graphitesend.graphitesend import GraphiteClient, GraphiteSendException
 
+configuration_namespace = "FLASK_GRAPHITE_"
+configuration_subnamespaces = ["carbon"]
 logger = logging.getLogger("flask-graphite")
 
 
@@ -32,31 +34,30 @@ class FlaskGraphite(object):
         :param app: The application to monitor
         """
         logger.info("configuring %s", app.name)
-        self.make_config(app)
+        self.config = self.get_config(app)
         try:
-            self.setup_graphitesend()
+            self.setup_graphitesend(self.config["carbon"])
         except GraphiteSendException:
             logger.error("Failed to setup Graphite client")
         else:
             logger.info("application %s successfully configured", app.name)
 
-    def make_config(self, app):
+    def get_config(self, app):
         """Retrieve the configuration
 
         :param app: The application from which to retrieve the configuration
         """
-        application_config = app.config.get_namespace("FLASK_GRAPHITE_")
+        config = {}
+        for subnamespace in configuration_subnamespaces:
+            namespace = configuration_namespace + subnamespace.upper() + "_"
+            config[subnamespace] = app.config.get_namespace(namespace)
+        return config
 
-        self.carbon_config = {}
-        for key, value in application_config.items():
-            if key.startswith("carbon_"):
-                self.carbon_config[key[len("carbon_"):]] = value
-
-    def setup_graphitesend(self):
+    def setup_graphitesend(self, carbon_config):
         """Setup the graphitesend client"""
-        carbon_config = self.carbon_config
         logger.debug("carbon configuration: %s", carbon_config)
         host = carbon_config.pop("host")
         port = carbon_config.pop("port")
         self.client = GraphiteClient(graphite_server=host, graphite_port=port,
                                      **carbon_config)
+        return self.client
