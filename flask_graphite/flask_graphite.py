@@ -4,16 +4,10 @@ import time
 
 from flask import request
 from graphitesend.graphitesend import GraphiteClient, GraphiteSendException
-from werkzeug.routing import _rule_re
+
+from .utils import get_request_metric_prefix
 
 logger = logging.getLogger("flask-graphite")
-
-
-def get_request_metric_prefix():
-    url_template = str(request.url_rule)
-    url_sanitized = _rule_re.sub("\g<static>\g<variable>", url_template)
-    metric_name = url_sanitized.replace('/', '.').strip('.').rstrip('.')
-    return metric_name
 
 
 def set_start_time():
