@@ -37,7 +37,7 @@ def request_count(exception):
     return metric, 1
 
 
-def request_status_code(response)
+def request_status_code(response):
     status_code = response.status_code
     metric_prefix = get_request_metric_prefix()
     metric = metric_prefix + ".status_code.{}".format(status_code)
