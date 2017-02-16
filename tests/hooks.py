@@ -67,3 +67,9 @@ def test_application_hook_failed_send(graphitesend_client, dumb_hook):
     binding = dumb_hook.bind(graphitesend_client)
     binding()
     assert graphitesend_client.send.called
+
+
+def test_application_hook_register(mocked_app, dumb_hook, graphitesend_client):
+    binding = dumb_hook.bind(graphitesend_client)
+    binding.register_into(mocked_app)
+    assert mocked_app.after_request.called

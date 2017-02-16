@@ -80,3 +80,6 @@ class ApplicationHook(object):
             self.client.send(*send_args)
         except GraphiteSendException:
             logger.error("Couldn't send metric \"%s\"", send_args)
+
+    def register_into(self, obj):
+        return self.hook.register_into(obj)
