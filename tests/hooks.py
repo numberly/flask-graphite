@@ -47,3 +47,9 @@ def test_dumb_hook_setup_decorator(mocked_app, dumb_hook):
         pass
 
     assert isinstance(foo, Hook)
+
+
+def test_exception_bad_type(mocked_app, dumb_hook):
+    dumb_hook.type = "invalid_type"
+    with pytest.raises(AttributeError):
+        dumb_hook.register_into(mocked_app)

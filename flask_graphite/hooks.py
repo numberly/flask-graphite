@@ -1,3 +1,8 @@
+import logging
+
+logger = logging.getLogger("flask-graphite")
+
+
 class Hook(object):
     """Represent a hook for flask requests
 
@@ -28,7 +33,12 @@ class Hook(object):
         """
         if self.setup_hook:
             self.setup_hook.register_into(obj)
-        registering_method = getattr(obj, self.type)
+        try:
+            registering_method = getattr(obj, self.type)
+        except AttributeError:
+            logger.error("Invalid type \"%s\". Couldn't register \"%s\" "
+                              "hook into %s.", self.type, self.name, obj)
+            raise
         return registering_method(self.function)
 
     def setup(self, function):
