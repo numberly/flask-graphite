@@ -17,6 +17,10 @@ class Hook(object):
         """Proxy for function calls"""
         return self.function(*args, **kwargs)
 
+    @property
+    def name(self):
+        return self.function.__name__
+
     def register_into(self, obj):
         """Register the hook as a request hook in `obj`
 

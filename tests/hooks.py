@@ -9,6 +9,7 @@ from flask_graphite.hooks import Hook
 def dumb_hook():
     mock = Mock()
     mock.return_value = 42
+    mock.__name__ = "dumb"
     return Hook(mock)
 
 
@@ -20,6 +21,10 @@ def test_dumb_hook_register(mocked_app, dumb_hook):
 def test_dumb_hook_callable(dumb_hook):
     assert callable(dumb_hook)
     assert dumb_hook() == 42
+
+
+def test_dumb_hook_name(dumb_hook):
+    assert dumb_hook.name == "dumb"
 
 
 def test_dumb_hook_decorator():
