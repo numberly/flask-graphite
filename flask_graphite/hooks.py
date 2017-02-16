@@ -1,5 +1,7 @@
 import logging
 
+from graphitesend.graphitesend import GraphiteSendException
+
 logger = logging.getLogger("flask-graphite")
 
 
@@ -51,3 +53,30 @@ class Hook(object):
         """
         self.setup_hook = Hook(function, type="before_request")
         return self.setup_hook
+
+    def bind(self, client):
+        """Bind the hook with the client
+
+        :param client: The client to bind with the hook
+        :return: An ApplicationHook instance
+        """
+        return ApplicationHook(self, client)
+
+
+class ApplicationHook(object):
+    """Binds a hook to an application's graphitesend instance
+
+    :param hook: The hook to bind with the client
+    :param client: The client to bind with the hook
+    """
+
+    def __init__(self, hook, client):
+        self.hook = hook
+        self.client = client
+
+    def __call__(self, *args, **kwargs):
+        send_args = self.hook(*args, **kwargs)
+        try:
+            self.client.send(*send_args)
+        except GraphiteSendException:
+            logger.error("Couldn't send metric \"%s\"", send_args)

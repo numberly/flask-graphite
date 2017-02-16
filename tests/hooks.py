@@ -1,5 +1,6 @@
 from unittest.mock import Mock
 
+from graphitesend.graphitesend import GraphiteSendException
 import pytest
 
 from flask_graphite.hooks import Hook
@@ -8,7 +9,7 @@ from flask_graphite.hooks import Hook
 @pytest.fixture
 def dumb_hook():
     mock = Mock()
-    mock.return_value = 42
+    mock.return_value = ("foo", 42)
     mock.__name__ = "dumb"
     return Hook(mock)
 
@@ -20,7 +21,7 @@ def test_dumb_hook_register(mocked_app, dumb_hook):
 
 def test_dumb_hook_callable(dumb_hook):
     assert callable(dumb_hook)
-    assert dumb_hook() == 42
+    assert dumb_hook() == ("foo", 42)
 
 
 def test_dumb_hook_name(dumb_hook):
@@ -53,3 +54,16 @@ def test_exception_bad_type(mocked_app, dumb_hook):
     dumb_hook.type = "invalid_type"
     with pytest.raises(AttributeError):
         dumb_hook.register_into(mocked_app)
+
+
+def test_application_hook(graphitesend_client, dumb_hook):
+    binding = dumb_hook.bind(graphitesend_client)
+    binding()
+    assert graphitesend_client.send.called
+
+
+def test_application_hook_failed_send(graphitesend_client, dumb_hook):
+    graphitesend_client.send.side_effect = GraphiteSendException
+    binding = dumb_hook.bind(graphitesend_client)
+    binding()
+    assert graphitesend_client.send.called
