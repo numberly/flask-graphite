@@ -1,41 +1,8 @@
 import logging
-import functools
-import time
 
-from flask import request
 from graphitesend.graphitesend import GraphiteClient, GraphiteSendException
 
-from .utils import get_request_metric_prefix
-
 logger = logging.getLogger("flask-graphite")
-
-
-def set_start_time():
-    request.start_time = time.time()
-
-
-def request_processing_time(exception):
-    # shiro: before_request may not be executed, see the 4th point of
-    # http://flask.pocoo.org/docs/0.10/reqcontext/#callbacks-and-errors
-    if not hasattr(request, "start_time"):
-        logger.warning("request doesn't have a start_time attribute")
-
-    metric_prefix = get_request_metric_prefix()
-    metric = metric_prefix + ".pt"
-    return metric, time.time() - request.start_time
-
-
-def request_count(exception):
-    metric_prefix = get_request_metric_prefix()
-    metric = metric_prefix + ".count"
-    return metric, 1
-
-
-def request_status_code(response):
-    status_code = response.status_code
-    metric_prefix = get_request_metric_prefix()
-    metric = metric_prefix + ".status_code.{}".format(status_code)
-    return metric, 1
 
 
 class FlaskGraphite(object):
@@ -68,7 +35,6 @@ class FlaskGraphite(object):
         self.make_config(app)
         try:
             self.setup_graphitesend()
-            self.setup_request_hooks(app)
         except GraphiteSendException:
             logger.error("Failed to setup Graphite client")
         else:
@@ -94,26 +60,3 @@ class FlaskGraphite(object):
         port = carbon_config.pop("port")
         self.client = GraphiteClient(graphite_server=host, graphite_port=port,
                                      **carbon_config)
-
-    def send_wrapped(self, metric, value):
-        """Send metric while handling errors"""
-        try:
-            self.client.send(metric, value)
-        except GraphiteSendException:
-            logger.error("Couldn't send metric %s with value %d", metric,
-                         value)
-
-    def wrap_request_hook(self, function):
-        """Wrap the hook before registering it"""
-        @functools.wraps(function)
-        def request_hook(exception):
-            metric, value = function(exception)
-            self.send_wrapped(metric, value)
-        return request_hook
-
-    def setup_request_hooks(self, app):
-        """Setup request hooks for monitoring"""
-        app.before_request(set_start_time)
-        app.teardown_request(self.wrap_request_hook(request_processing_time))
-        app.teardown_request(self.wrap_request_hook(request_count))
-        app.after_request(self.wrap_request_hook(request_status_code))
