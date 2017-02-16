@@ -5,7 +5,7 @@ from .utils import get_request_metric_prefix
 
 
 @Hook
-def request_count(response)
+def request_count(response):
     metric_prefix = get_request_metric_prefix()
     metric = metric_prefix + ".count"
     return metric, 1
@@ -34,3 +34,5 @@ def request_processing_time(exception):
 @request_processing_time.setup
 def set_start_time():
     request.start_time = time.time()
+
+default_hooks = [request_count, request_status_code, request_processing_time]

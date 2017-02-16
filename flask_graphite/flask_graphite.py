@@ -2,6 +2,8 @@ import logging
 
 from graphitesend.graphitesend import GraphiteClient, GraphiteSendException
 
+from .request_hooks import default_hooks
+
 configuration_namespace = "FLASK_GRAPHITE_"
 configuration_subnamespaces = ["carbon"]
 logger = logging.getLogger("flask-graphite")
@@ -36,7 +38,8 @@ class FlaskGraphite(object):
         logger.info("configuring %s", app.name)
         self.config = self.get_config(app)
         try:
-            self.setup_graphitesend(self.config["carbon"])
+            client = self.setup_graphitesend(self.config["carbon"])
+            self.setup_hooks(app, client)
         except GraphiteSendException:
             logger.error("Failed to setup Graphite client")
         else:
@@ -58,6 +61,10 @@ class FlaskGraphite(object):
         logger.debug("carbon configuration: %s", carbon_config)
         host = carbon_config.pop("host")
         port = carbon_config.pop("port")
-        self.client = GraphiteClient(graphite_server=host, graphite_port=port,
-                                     **carbon_config)
-        return self.client
+        return GraphiteClient(graphite_server=host, graphite_port=port,
+                              **carbon_config)
+
+    def setup_hooks(self, app, client):
+        for hook in default_hooks:
+            binded_hook = hook.bind(client)
+            binded_hook.register_into(app)
