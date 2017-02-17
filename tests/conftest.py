@@ -11,7 +11,9 @@ mocked_app_methods = ["before_request", "after_request", "teardown_request"]
 
 @pytest.fixture
 def app():
-    return flask.Flask("flask-graphite")
+    _app = flask.Flask("flask-graphite")
+    _app.config["FLASK_GRAPHITE_CARBON_DRYRUN"] = True
+    return _app
 
 
 @pytest.fixture
