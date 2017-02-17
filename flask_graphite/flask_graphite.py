@@ -59,8 +59,8 @@ class FlaskGraphite(object):
     def setup_graphitesend(self, carbon_config):
         """Setup the graphitesend client"""
         logger.debug("carbon configuration: %s", carbon_config)
-        host = carbon_config.pop("host")
-        port = carbon_config.pop("port")
+        host = carbon_config.pop("host", None)
+        port = carbon_config.pop("port", None)
         return GraphiteClient(graphite_server=host, graphite_port=port,
                               **carbon_config)
 
