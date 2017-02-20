@@ -73,3 +73,13 @@ def test_application_hook_register(mocked_app, dumb_hook, graphitesend_client):
     binding = dumb_hook.bind(graphitesend_client)
     binding.register_into(mocked_app)
     assert mocked_app.after_request.called
+
+
+def test_repr(dumb_hook):
+    s = repr(dumb_hook)
+    assert s == "Hook(dumb)"
+
+
+def test_repr_application_hook(dumb_hook, graphitesend_client):
+    s = repr(dumb_hook.bind(graphitesend_client))
+    assert s == "ApplicationHook(Hook(dumb), {})".format(graphitesend_client)
