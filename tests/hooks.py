@@ -14,11 +14,6 @@ def dumb_hook():
     return Hook(mock)
 
 
-def test_dumb_hook_register(mocked_app, dumb_hook):
-    dumb_hook.register_into(mocked_app)
-    assert mocked_app.after_request.called
-
-
 def test_dumb_hook_callable(dumb_hook):
     assert callable(dumb_hook)
     assert dumb_hook() == ("foo", 42)
@@ -36,9 +31,9 @@ def test_dumb_hook_decorator():
     assert isinstance(foo, Hook)
 
 
-def test_dumb_hook_setup(mocked_app, dumb_hook):
+def test_dumb_hook_setup(graphitesend_client, mocked_app, dumb_hook):
     dumb_hook.setup(dumb_hook)
-    dumb_hook.register_into(mocked_app)
+    dumb_hook.bind(graphitesend_client).register_into(mocked_app)
     assert mocked_app.before_request.called
 
 
@@ -50,17 +45,18 @@ def test_dumb_hook_setup_decorator(mocked_app, dumb_hook):
     assert isinstance(foo, Hook)
 
 
-def test_exception_bad_type(mocker, mocked_app, dumb_hook):
+def test_exception_bad_type(mocker, mocked_app, dumb_hook,
+                            graphitesend_client):
     mocker.patch.object(logger, "error")
     dumb_hook.type = "invalid_type"
     with pytest.raises(AttributeError):
-        dumb_hook.register_into(mocked_app)
+        dumb_hook.bind(graphitesend_client).register_into(mocked_app)
     assert logger.error.called
 
 
 def test_application_hook(graphitesend_client, dumb_hook):
     binding = dumb_hook.bind(graphitesend_client)
-    binding()
+    binding(None)
     assert graphitesend_client.send.called
 
 
@@ -68,7 +64,7 @@ def test_application_hook_failed_send(mocker, graphitesend_client, dumb_hook):
     mocker.patch.object(logger, "error")
     graphitesend_client.send.side_effect = GraphiteSendException
     binding = dumb_hook.bind(graphitesend_client)
-    binding()
+    binding(None)
     assert graphitesend_client.send.called
     assert logger.error.called
 
