@@ -54,6 +54,19 @@ def test_exception_bad_type(mocker, mocked_app, dumb_hook,
     assert logger.error.called
 
 
+def test_setup_hook_exception_bad_type(mocker, mocked_app, dumb_hook,
+                                       graphitesend_client):
+    @dumb_hook.setup
+    def setup_hook():
+        pass
+
+    mocker.patch.object(logger, "error")
+    setup_hook.type = "invalid_type"
+    with pytest.raises(AttributeError):
+        setup_hook.register_into(mocked_app)
+    assert logger.error.called
+
+
 def test_application_hook(graphitesend_client, dumb_hook):
     binding = dumb_hook.bind(graphitesend_client)
     binding(None)
