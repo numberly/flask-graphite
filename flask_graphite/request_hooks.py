@@ -28,7 +28,7 @@ def request_status_code(response):
 def request_processing_time(exception):
     # shiro: before_request may not be executed, see the 4th point of
     # http://flask.pocoo.org/docs/0.10/reqcontext/#callbacks-and-errors
-    if not hasattr(request, "start_time"):
+    if not hasattr(request, "start_time"):  # pragma: no cover
         logger.warning("request doesn't have a start_time attribute")
         return
     metric_prefix = get_request_metric_prefix()
