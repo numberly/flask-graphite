@@ -41,4 +41,13 @@ def set_start_time():
     request.start_time = time.time()
 
 
-default_hooks = [request_count, request_status_code, request_processing_time]
+@Hook
+def response_size(response):
+    metric_prefix = get_request_metric_prefix()
+    data = response.get_data()
+    metric = metric_prefix + ".size"
+    return metric, len(data)
+
+
+default_hooks = [request_count, request_status_code, request_processing_time,
+                 response_size]
