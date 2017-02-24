@@ -2,7 +2,7 @@ from unittest.mock import Mock
 
 import pytest
 
-from flask_graphite.hooks import Hook, logger
+from flask_graphite.hooks import MetricHook, logger
 
 
 @pytest.fixture
@@ -10,7 +10,7 @@ def dumb_hook():
     mock = Mock()
     mock.return_value = ("foo", 42)
     mock.__name__ = "dumb"
-    return Hook(mock)
+    return MetricHook(mock)
 
 
 def test_dumb_hook_callable(dumb_hook):
@@ -22,11 +22,11 @@ def test_dumb_hook_name(dumb_hook):
 
 
 def test_dumb_hook_decorator():
-    @Hook
+    @MetricHook
     def foo():
         pass
 
-    assert isinstance(foo, Hook)
+    assert isinstance(foo, MetricHook)
 
 
 def test_dumb_hook_setup(graphitesend_client, mocked_app, dumb_hook):
@@ -40,7 +40,7 @@ def test_dumb_hook_setup_decorator(mocked_app, dumb_hook):
     def foo():
         pass
 
-    assert isinstance(foo, Hook)
+    assert isinstance(foo, MetricHook)
 
 
 def test_exception_bad_type(mocker, mocked_app, dumb_hook,
@@ -67,4 +67,4 @@ def test_setup_hook_exception_bad_type(mocker, mocked_app, dumb_hook,
 
 def test_repr(dumb_hook):
     s = repr(dumb_hook)
-    assert s == "Hook(dumb)"
+    assert s == "MetricHook(dumb)"

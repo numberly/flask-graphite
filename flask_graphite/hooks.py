@@ -8,7 +8,7 @@ from .utils import get_request_metric_prefix
 logger = logging.getLogger("flask-graphite")
 
 
-class Hook(object):
+class MetricHook(object):
     """Represent a hook for flask requests
 
     A hook proxy calls to its function.
@@ -39,7 +39,7 @@ class Hook(object):
         return response_or_exception
 
     def __repr__(self):
-        return "Hook({})".format(self.name)
+        return "MetricHook({})".format(self.name)
 
     @property
     def name(self):
@@ -59,7 +59,7 @@ class Hook(object):
 
         :param function: The function used as setup hook
         """
-        self.setup_hook = Hook(function, type="before_request")
+        self.setup_hook = MetricHook(function, type="before_request")
         return self.setup_hook
 
     def register_into(self, obj):
