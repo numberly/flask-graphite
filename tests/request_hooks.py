@@ -1,28 +1,21 @@
 import pytest
-from flask import jsonify
 
 from flask_graphite.request_hooks import default_hooks
 
 
 @pytest.fixture(params=default_hooks, ids=[x.name for x in default_hooks])
-def hook(request):
-    yield request.param
+def hook(mocker, request):
+    _hook = request.param
+    mocker.patch.object(_hook, "function")
+    _hook.function.return_value = ("foo", 1)
+    yield _hook
 
 
 @pytest.fixture
-def hooked_app(graphitesend_client, app, hook):
-    @app.route("/foo/<int:id>/<field>")
-    def view(id, field):
-        return jsonify("{} => {}".format(id, field))
-    hook.register_into(app, graphitesend_client)
-    return app
+def plugged_client(plugged_app):
+    return plugged_app.test_client()
 
 
-@pytest.fixture
-def hooked_client(hooked_app):
-    return hooked_app.test_client()
-
-
-def test_dont_modify_response(hooked_client, graphitesend_client):
-    response = hooked_client.get("/foo/42/bar")
-    assert graphitesend_client.send.called
+def test_dont_modify_response(plugged_client, hook):
+    plugged_client.get("/foo/42/bar")
+    assert hook.function.called
