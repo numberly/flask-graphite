@@ -25,7 +25,7 @@ def request_status_code(response):
 
 
 @Hook
-def request_processing_time(exception):
+def request_processing_time(_):
     # shiro: before_request may not be executed, see the 4th point of
     # http://flask.pocoo.org/docs/0.10/reqcontext/#callbacks-and-errors
     if not hasattr(request, "start_time"):  # pragma: no cover
@@ -39,5 +39,6 @@ def request_processing_time(exception):
 @request_processing_time.setup
 def set_start_time():
     request.start_time = time.time()
+
 
 default_hooks = [request_count, request_status_code, request_processing_time]

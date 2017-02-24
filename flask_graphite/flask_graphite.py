@@ -4,8 +4,6 @@ from graphitesend.graphitesend import GraphiteClient, GraphiteSendException
 
 from .request_hooks import default_hooks
 
-configuration_namespace = "FLASK_GRAPHITE_"
-configuration_subnamespaces = ["carbon"]
 logger = logging.getLogger("flask-graphite")
 
 
@@ -16,54 +14,29 @@ class FlaskGraphite(object):
     application configuration.
 
     The main options are:
-     - FLASK_GRAPHITE_CARBON_HOST: The carbon host to send metrics
-     - FLASK_GRAPHITE_CARBON_PORT: The carbon port to send metrics
+     - FLASK_GRAPHITE_HOST: The Carbon host to send metrics
+     - FLASK_GRAPHITE_PORT: The Carbon port to send metrics
 
-    All other config options starting with "FLASK_GRAPHITE_CARBON_" are passed
+    All other config options starting with "FLASK_GRAPHITE_" are passed
     without the prefix to the Graphite client at instanciation.
 
     :param app: The application to monitor
     """
 
     def __init__(self, app=None):
-        self.app = app
+        self.config = {}
         if app is not None:
             self.init_app(app)
 
     def init_app(self, app):
-        """Initialize monitoring of the application
+        self.config[app] = app.config.get_namespace("FLASK_GRAPHITE_")
+        self.config[app]["graphite_server"] = self.config[app].pop("host", None)
+        self.config[app]["graphite_port"] = self.config[app].pop("port", None)
 
-        :param app: The application to monitor
-        """
-        logger.info("configuring %s", app.name)
-        self.config = self.get_config(app)
         try:
-            client = self.setup_graphitesend(self.config["carbon"])
-            self.setup_hooks(app, client)
+            app.graphite = GraphiteClient(**self.config[app])
         except GraphiteSendException:
             logger.error("Failed to setup Graphite client")
-        else:
-            logger.info("application %s successfully configured", app.name)
 
-    def get_config(self, app):
-        """Retrieve the configuration
-
-        :param app: The application from which to retrieve the configuration
-        """
-        config = {}
-        for subnamespace in configuration_subnamespaces:
-            namespace = configuration_namespace + subnamespace.upper() + "_"
-            config[subnamespace] = app.config.get_namespace(namespace)
-        return config
-
-    def setup_graphitesend(self, carbon_config):
-        """Setup the graphitesend client"""
-        logger.debug("carbon configuration: %s", carbon_config)
-        host = carbon_config.pop("host", None)
-        port = carbon_config.pop("port", None)
-        return GraphiteClient(graphite_server=host, graphite_port=port,
-                              **carbon_config)
-
-    def setup_hooks(self, app, client):
         for hook in default_hooks:
-            hook.register_into(app, client)
+            hook.register_into(app)
