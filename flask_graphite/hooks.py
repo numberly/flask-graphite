@@ -3,6 +3,8 @@ import logging
 from flask import current_app
 from graphitesend.graphitesend import GraphiteSendException
 
+from .utils import get_request_metric_prefix
+
 logger = logging.getLogger("flask-graphite")
 
 
@@ -28,8 +30,10 @@ class Hook(object):
         graphite_args = self.function(*function_args)
         if graphite_args is None:
             return response_or_exception
+        metric_name, metric_value = graphite_args
+        metric_name = get_request_metric_prefix() + '.' + metric_name
         try:
-            current_app.graphite.send(*graphite_args)
+            current_app.graphite.send(metric_name, metric_value)
         except (RuntimeError, GraphiteSendException):  # pragma: no cover
             logger.error("Couldn't send metric \"%s\"", graphite_args)
         return response_or_exception
