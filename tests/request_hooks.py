@@ -14,7 +14,7 @@ def hooked_app(graphitesend_client, app, hook):
     @app.route("/foo/<int:id>/<field>")
     def view(id, field):
         return jsonify("{} => {}".format(id, field))
-    hook.bind(graphitesend_client).register_into(app)
+    hook.register_into(app, graphitesend_client)
     return app
 
 

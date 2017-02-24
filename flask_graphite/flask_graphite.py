@@ -66,5 +66,4 @@ class FlaskGraphite(object):
 
     def setup_hooks(self, app, client):
         for hook in default_hooks:
-            binded_hook = hook.bind(client)
-            binded_hook.register_into(app)
+            hook.register_into(app, client)

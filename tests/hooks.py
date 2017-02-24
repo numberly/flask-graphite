@@ -33,7 +33,7 @@ def test_dumb_hook_decorator():
 
 def test_dumb_hook_setup(graphitesend_client, mocked_app, dumb_hook):
     dumb_hook.setup(dumb_hook)
-    dumb_hook.bind(graphitesend_client).register_into(mocked_app)
+    dumb_hook.register_into(mocked_app, graphitesend_client)
     assert mocked_app.before_request.called
 
 
@@ -50,7 +50,7 @@ def test_exception_bad_type(mocker, mocked_app, dumb_hook,
     mocker.patch.object(logger, "error")
     dumb_hook.type = "invalid_type"
     with pytest.raises(AttributeError):
-        dumb_hook.bind(graphitesend_client).register_into(mocked_app)
+        dumb_hook.register_into(mocked_app, graphitesend_client)
     assert logger.error.called
 
 
@@ -63,36 +63,10 @@ def test_setup_hook_exception_bad_type(mocker, mocked_app, dumb_hook,
     mocker.patch.object(logger, "error")
     setup_hook.type = "invalid_type"
     with pytest.raises(AttributeError):
-        setup_hook.register_into(mocked_app)
+        setup_hook.register_into(mocked_app, graphitesend_client)
     assert logger.error.called
-
-
-def test_application_hook(graphitesend_client, dumb_hook):
-    binding = dumb_hook.bind(graphitesend_client)
-    binding(None)
-    assert graphitesend_client.send.called
-
-
-def test_application_hook_failed_send(mocker, graphitesend_client, dumb_hook):
-    mocker.patch.object(logger, "error")
-    graphitesend_client.send.side_effect = GraphiteSendException
-    binding = dumb_hook.bind(graphitesend_client)
-    binding(None)
-    assert graphitesend_client.send.called
-    assert logger.error.called
-
-
-def test_application_hook_register(mocked_app, dumb_hook, graphitesend_client):
-    binding = dumb_hook.bind(graphitesend_client)
-    binding.register_into(mocked_app)
-    assert mocked_app.after_request.called
 
 
 def test_repr(dumb_hook):
     s = repr(dumb_hook)
     assert s == "Hook(dumb)"
-
-
-def test_repr_application_hook(dumb_hook, graphitesend_client):
-    s = repr(dumb_hook.bind(graphitesend_client))
-    assert s == "ApplicationHook(Hook(dumb), {})".format(graphitesend_client)
