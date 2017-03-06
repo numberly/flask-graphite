@@ -21,6 +21,13 @@ def request_status_code(response):
 
 
 @MetricHook
+def request_status_type(response):
+    status_type = response.status_code // 100
+    metric = "status_code.{}XX".format(status_type)
+    return metric, 1
+
+
+@MetricHook
 def request_processing_time(_):
     # shiro: before_request may not be executed, see the 4th point of
     # http://flask.pocoo.org/docs/0.10/reqcontext/#callbacks-and-errors
@@ -41,5 +48,5 @@ def response_size(response):
     return "size", len(data)
 
 
-default_hooks = [request_count, request_status_code, request_processing_time,
-                 response_size]
+default_hooks = [request_count, request_status_code, request_status_type,
+                 request_processing_time, response_size]
