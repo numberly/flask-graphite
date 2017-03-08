@@ -13,9 +13,6 @@ Flask-Graphite
         :target: https://flask-graphite.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/Shir0kamii/flask_graphite/shield.svg
-     :target: https://pyup.io/repos/github/Shir0kamii/flask_graphite/
-     :alt: Updates
 
 
 Flask-Graphite grant you the power to push useful metrics without efforts
