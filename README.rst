@@ -25,7 +25,10 @@ without efforts
 Features
 --------
 
-* TODO
+* Send metrics to graphite for each request
+* Metric name based on route of the request
+* Average processing time, number of request, and stats about status code for
+  each route
 
 Credits
 ---------
