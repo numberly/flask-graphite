@@ -14,8 +14,8 @@ Flask-Graphite
         :alt: Documentation Status
 
 
-
-Flask-Graphite grant you the power to push useful metrics without efforts
+Flask-Graphite grant you the power to push useful metrics for each route
+without efforts
 
 
 * Free software: BSD license
