@@ -19,7 +19,7 @@ test_requirements = [
 
 setup(
     name='flask_graphite',
-    version='0.0.0',
+    version='0.1.0',
     description="Flask-Graphite grant you the power to push useful metrics"
                 " without efforts",
     long_description=readme + '\n\n' + history,
