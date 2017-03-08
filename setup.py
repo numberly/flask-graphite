@@ -10,18 +10,23 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 requirements = [
-    # TODO: put package requirements here
+    "Flask==0.12",
+    "graphitesend==0.7.0"
+]
+
+setup_requirements = [
+    "pytest-runner"
 ]
 
 test_requirements = [
-    # TODO: put package test requirements here
+    "pytest==3.0.0"
 ]
 
 setup(
     name='flask_graphite',
     version='0.1.0',
     description="Flask-Graphite grant you the power to push useful metrics"
-                " without efforts",
+                " for each route without efforts",
     long_description=readme + '\n\n' + history,
     author="Alexandre Bonnetain",
     author_email='alexandre.bonnetain@1000mercis.com',
@@ -33,6 +38,7 @@ setup(
                  'flask_graphite'},
     include_package_data=True,
     install_requires=requirements,
+    setup_requires=setup_requirements,
     license="BSD license",
     zip_safe=False,
     keywords='flask_graphite',
@@ -49,6 +55,6 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
     ],
-    test_suite='tests',
+    test_suite='py.test',
     tests_require=test_requirements
 )
