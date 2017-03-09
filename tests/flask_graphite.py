@@ -1,5 +1,7 @@
 import pytest
 
+from graphitesend.graphitesend import GraphiteSendException
+
 from flask_graphite.flask_graphite import FlaskGraphite, logger
 
 
@@ -19,8 +21,8 @@ def test_init_app(app, plugin):
 def test_init_failed(mocker, app, plugin):
     mocker.patch.object(logger, "error")
     app.config["FLASK_GRAPHITE_DRYRUN"] = False
-    plugin.init_app(app)
-    assert logger.error.called
+    with pytest.raises(GraphiteSendException):
+        plugin.init_app(app)
 
 
 def test_config(app, plugin):

@@ -1,6 +1,6 @@
 import logging
 
-from graphitesend.graphitesend import GraphiteClient, GraphiteSendException
+from graphitesend.graphitesend import GraphiteClient
 
 from .request_hooks import default_hooks
 
@@ -33,10 +33,7 @@ class FlaskGraphite(object):
         self.config[app]["graphite_server"] = self.config[app].pop("host", None)
         self.config[app]["graphite_port"] = self.config[app].pop("port", None)
 
-        try:
-            app.graphite = GraphiteClient(**self.config[app])
-        except GraphiteSendException:
-            logger.error("Failed to setup Graphite client")
+        app.graphite = GraphiteClient(**self.config[app])
 
         for hook in default_hooks:
             hook.register_into(app)
