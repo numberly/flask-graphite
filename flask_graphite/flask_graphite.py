@@ -33,6 +33,10 @@ class FlaskGraphite(object):
             self.init_app(app)
 
     def init_app(self, app):
+        """Read config and set the hooks in place to monitor the application
+
+        :param app: The application to monitor
+        """
         config = self.config[app] = app.config.get_namespace("FLASK_GRAPHITE_")
         config["graphite_server"] = config.pop("host", DEFAULT_HOST)
         config["graphite_port"] = config.pop("port", DEFAULT_PORT)
