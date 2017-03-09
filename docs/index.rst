@@ -9,6 +9,7 @@ Contents:
    readme
    installation
    get-started
+   configuration
    contributing
    history
 
