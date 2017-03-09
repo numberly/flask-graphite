@@ -21,8 +21,8 @@ class FlaskGraphite(object):
      - FLASK_GRAPHITE_HOST: The Carbon host to send metrics
      - FLASK_GRAPHITE_PORT: The Carbon port to send metrics
 
-    All other config options starting with "FLASK_GRAPHITE_" are passed
-    without the prefix to the Graphite client at instanciation.
+    You can read :ref:`Configuring Flask-Graphite` to learn about the other
+    option configurations.
 
     :param app: The application to monitor
     """
