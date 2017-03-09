@@ -2,7 +2,12 @@
 Get Started
 ===========
 
-Here is a mimal template to use Flask-Graphite in a project::
+Example
+-------
+
+Here is a mimal template to use Flask-Graphite in a project.
+
+Write this code in a `test.py` file::
 
     from flask, Flask, jsonify
     from flask_graphite.flask_graphite import FlaskGraphite
@@ -24,3 +29,27 @@ Here is a mimal template to use Flask-Graphite in a project::
 
     if __name__ == "__main__":
         app.run(host="localhost", port=5000)
+
+Run this example
+----------------
+
+To run this example, you will need to run carbon-aggregator_ in local on port
+2023.
+
+You can launch the server:
+
+.. code-block:: console
+
+    $ python test.py
+
+You can then make a request to the server:
+
+.. code-block:: console
+
+    $ curl http://localhost:5000/
+
+By doing this, the `foo` view will be executed, and thanks to the
+Flask-Graphite plugin, a number of metrics will be available.
+
+
+.. _carbon-aggregator: http://graphite.readthedocs.io/en/latest/carbon-daemons.html#carbon-aggregator-py
