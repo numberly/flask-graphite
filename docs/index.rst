@@ -13,9 +13,4 @@ Contents:
    contributing
    history
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+You can also go to the :ref:`search` for a quick look at something specific.
