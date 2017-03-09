@@ -11,7 +11,9 @@ logger = logging.getLogger("flask-graphite")
 class MetricHook(object):
     """Represent a hook for flask requests
 
-    A hook proxy calls to its function.
+    A hook proxy calls to its function. The function should return a 2-tuple
+    containing a string (the metric name) and ab integer (the metric value),
+    which will be sent to graphite through graphitesend.
 
     :param function: The function used as hook
     :param type: The type of hook (before_request, after_request or
