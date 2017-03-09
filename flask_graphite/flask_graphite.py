@@ -34,6 +34,8 @@ class FlaskGraphite(object):
         self.config[app]["graphite_port"] = self.config[app].pop("port", None)
 
         app.graphite = GraphiteClient(**self.config[app])
+        logging.info("graphite client instantiated with config: %s",
+                     self.config[app])
 
         for hook in default_hooks:
             hook.register_into(app)
