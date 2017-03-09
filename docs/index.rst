@@ -10,6 +10,7 @@ Contents:
    installation
    get-started
    configuration
+   metrics
    contributing
    history
 
