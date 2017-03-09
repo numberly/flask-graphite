@@ -1,5 +1,5 @@
 Welcome to Flask-Graphite's documentation!
-======================================
+==========================================
 
 Contents:
 
@@ -11,6 +11,7 @@ Contents:
    get-started
    configuration
    metrics
+   reference
    contributing
    history
 
