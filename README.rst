@@ -6,8 +6,8 @@ Flask-Graphite
 .. image:: https://img.shields.io/pypi/v/flask_graphite.svg
         :target: https://pypi.python.org/pypi/flask_graphite
 
-.. image:: https://img.shields.io/travis/Shir0kamii/flask_graphite.svg
-        :target: https://travis-ci.org/Shir0kamii/flask_graphite
+.. image:: https://img.shields.io/travis/numberly/flask_graphite.svg
+        :target: https://travis-ci.org/numberly/flask_graphite
 
 .. image:: https://readthedocs.org/projects/flask-graphite/badge/?version=latest
         :target: https://flask-graphite.readthedocs.io/en/latest/?badge=latest

@@ -30,7 +30,7 @@ setup(
     long_description=readme + '\n\n' + history,
     author="Alexandre Bonnetain",
     author_email='alexandre.bonnetain@1000mercis.com',
-    url='https://github.com/Shir0kamii/flask_graphite',
+    url='https://github.com/numberly/flask_graphite',
     packages=[
         'flask_graphite',
     ],

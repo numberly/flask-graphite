@@ -32,13 +32,13 @@ You can either clone the public repository:
 
 .. code-block:: console
 
-    $ git clone git://github.com/Shir0kamii/flask_graphite
+    $ git clone git://github.com/numberly/flask_graphite
 
 Or download the `tarball`_:
 
 .. code-block:: console
 
-    $ curl  -OL https://github.com/Shir0kamii/flask_graphite/tarball/master
+    $ curl  -OL https://github.com/numberly/flask_graphite/tarball/master
 
 Once you have a copy of the source, you can install it with:
 
@@ -47,5 +47,5 @@ Once you have a copy of the source, you can install it with:
     $ python setup.py install
 
 
-.. _Github repo: https://github.com/Shir0kamii/flask_graphite
-.. _tarball: https://github.com/Shir0kamii/flask_graphite/tarball/master
+.. _Github repo: https://github.com/numberly/flask_graphite
+.. _tarball: https://github.com/numberly/flask_graphite/tarball/master
