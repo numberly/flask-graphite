@@ -1,3 +1,4 @@
+from functools import update_wrapper
 import logging
 
 from flask import current_app
@@ -22,6 +23,7 @@ class MetricHook(object):
     """
 
     def __init__(self, function, type="after_request"):
+        update_wrapper(self, function)
         self.function = function
         self.setup_hook = None
         self.type = type
@@ -48,12 +50,6 @@ class MetricHook(object):
 
     def __repr__(self):
         return "{}({})".format(self.__class__.__name__, self.name)
-
-    @property
-    def name(self):
-        return self.function.__name__
-
-    __name__ = name
 
     @property
     def is_setup_hook(self):
