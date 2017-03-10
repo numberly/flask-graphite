@@ -11,9 +11,10 @@ logger = logging.getLogger("flask-graphite")
 class MetricHook(object):
     """Represent a hook for flask requests
 
-    A hook proxy calls to its function. The function should return a 2-tuple
-    containing a string (the metric name) and ab integer (the metric value),
-    which will be sent to graphite through graphitesend.
+    This hook decorates a function to make it a suitable Flask hook.
+
+    The function *must* return a 2-tuple which represents a metric name and
+    it's value.
 
     :param function: The function used as hook
     :param type: The type of hook (before_request, after_request or
@@ -26,6 +27,11 @@ class MetricHook(object):
         self.type = type
 
     def __call__(self, response_or_exception=None):
+        """Proxy the call to the decorated function
+
+        :param response_or_exception: The argument passed by flask (either
+        a Response object or an exception)
+        """
         function_args = []
         if not self.is_setup_hook:
             function_args.append(response_or_exception)
@@ -51,6 +57,7 @@ class MetricHook(object):
 
     @property
     def is_setup_hook(self):
+        """Property to test if a hook is a setup hook"""
         return self.type == "before_request"
 
     def setup(self, function):
