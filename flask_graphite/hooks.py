@@ -47,7 +47,7 @@ class MetricHook(object):
         return response_or_exception
 
     def __repr__(self):
-        return "MetricHook({})".format(self.name)
+        return "{}({})".format(self.__class__.__name__, self.name)
 
     @property
     def name(self):
