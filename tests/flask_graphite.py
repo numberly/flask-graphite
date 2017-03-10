@@ -26,13 +26,14 @@ def test_init_failed(mocker, app, plugin):
 
 
 def test_config(app, plugin):
-    app.config["FLASK_GRAPHITE_HOST"] = "localhost"
-    app.config["FLASK_GRAPHITE_PORT"] = 2023
+    app.config["FLASK_GRAPHITE_HOST"] = "google.com"
+    app.config["FLASK_GRAPHITE_PORT"] = 1337
     app.config["FLASK_GRAPHITE_DRYRUN"] = True
     plugin.init_app(app)
     assert app in plugin.config
-    assert plugin.config[app] == {"graphite_server": "localhost",
-                                  "graphite_port": 2023, "dryrun": True}
+    assert plugin.config[app]["graphite_server"] == "google.com"
+    assert plugin.config[app]["graphite_port"] == 1337
+    assert plugin.config[app]["dryrun"] == True
 
 
 def test_setup_graphitesend(app, plugin):
