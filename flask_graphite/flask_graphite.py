@@ -29,9 +29,9 @@ class FlaskGraphite(object):
             self.init_app(app)
 
     def init_app(self, app):
-        self.config[app] = app.config.get_namespace("FLASK_GRAPHITE_")
-        self.config[app]["graphite_server"] = self.config[app].pop("host", None)
-        self.config[app]["graphite_port"] = self.config[app].pop("port", None)
+        config = self.config[app] = app.config.get_namespace("FLASK_GRAPHITE_")
+        config["graphite_server"] = self.config[app].pop("host", None)
+        config["graphite_port"] = self.config[app].pop("port", None)
 
         app.graphite = GraphiteClient(**self.config[app])
         logging.info("graphite client instantiated with config: %s",
