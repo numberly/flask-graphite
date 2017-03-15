@@ -56,3 +56,6 @@ def response_size(response):
 
 default_hooks = [request_count, request_status_code, request_status_type,
                  request_processing_time, response_size]
+
+__all__ = ["request_count", "request_status_code", "request_status_type",
+           "request_processing_time", "response_size", "default_hooks"]

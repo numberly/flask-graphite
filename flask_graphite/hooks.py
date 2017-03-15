@@ -85,3 +85,6 @@ class MetricHook(object):
                          "hook into %s.", self.type, self.name, obj)
             raise
         return registering_method(self)
+
+
+__all__ = ["MetricHook"]

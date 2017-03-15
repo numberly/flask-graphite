@@ -48,3 +48,6 @@ class FlaskGraphite(object):
 
         for hook in default_hooks:
             hook.register_into(app)
+
+
+__all__ = ["FlaskGraphite"]
