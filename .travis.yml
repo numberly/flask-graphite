@@ -19,7 +19,7 @@ deploy:
   user: shir0kamii
   true:
     condition: $TOXENV == py27
-    repo: Shir0kamii/flask_graphite
+    repo: numberly/flask_graphite
     tags: true
 env:
 - TOXENV=py35
