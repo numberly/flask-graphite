@@ -21,8 +21,8 @@ class FlaskGraphite(object):
      - FLASK_GRAPHITE_HOST: The Carbon host to send metrics
      - FLASK_GRAPHITE_PORT: The Carbon port to send metrics
 
-    All other config options starting with "FLASK_GRAPHITE_" are passed
-    without the prefix to the Graphite client at instanciation.
+    You can read :ref:`Configuring Flask-Graphite` to learn about the other
+    option configurations.
 
     :param app: The application to monitor
     """
@@ -33,6 +33,10 @@ class FlaskGraphite(object):
             self.init_app(app)
 
     def init_app(self, app):
+        """Read config and set the hooks in place to monitor the application
+
+        :param app: The application to monitor
+        """
         config = self.config[app] = app.config.get_namespace("FLASK_GRAPHITE_")
         config["graphite_server"] = config.pop("host", DEFAULT_HOST)
         config["graphite_port"] = config.pop("port", DEFAULT_PORT)
@@ -44,3 +48,6 @@ class FlaskGraphite(object):
 
         for hook in default_hooks:
             hook.register_into(app)
+
+
+__all__ = ["FlaskGraphite"]

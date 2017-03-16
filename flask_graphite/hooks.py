@@ -1,3 +1,4 @@
+from functools import update_wrapper
 import logging
 
 from flask import current_app
@@ -11,7 +12,10 @@ logger = logging.getLogger("flask-graphite")
 class MetricHook(object):
     """Represent a hook for flask requests
 
-    A hook proxy calls to its function.
+    This hook decorates a function to make it a suitable Flask hook.
+
+    The function *must* return a 2-tuple which represents a metric name and
+    it's value.
 
     :param function: The function used as hook
     :param type: The type of hook (before_request, after_request or
@@ -19,11 +23,17 @@ class MetricHook(object):
     """
 
     def __init__(self, function, type="after_request"):
+        update_wrapper(self, function)
         self.function = function
         self.setup_hook = None
         self.type = type
 
     def __call__(self, response_or_exception=None):
+        """Proxy the call to the decorated function
+
+        :param response_or_exception: The argument passed by flask (either
+        a Response object or an exception)
+        """
         function_args = []
         if not self.is_setup_hook:
             function_args.append(response_or_exception)
@@ -39,16 +49,11 @@ class MetricHook(object):
         return response_or_exception
 
     def __repr__(self):
-        return "MetricHook({})".format(self.name)
-
-    @property
-    def name(self):
-        return self.function.__name__
-
-    __name__ = name
+        return "{}({})".format(self.__class__.__name__, self.name)
 
     @property
     def is_setup_hook(self):
+        """Property to test if a hook is a setup hook"""
         return self.type == "before_request"
 
     def setup(self, function):
@@ -80,3 +85,6 @@ class MetricHook(object):
                          "hook into %s.", self.type, self.name, obj)
             raise
         return registering_method(self)
+
+
+__all__ = ["MetricHook"]
