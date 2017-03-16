@@ -9,8 +9,8 @@ Here is a complete example of an application using FlaskGraphite
 
 Write this code in a `test.py` file::
 
-    from flask, Flask, jsonify
-    from flask_graphite.flask_graphite import FlaskGraphite
+    from flask import Flask, jsonify
+    from flask_graphite import FlaskGraphite
 
 
     metric_sender = FlaskGraphite()

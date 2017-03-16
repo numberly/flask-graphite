@@ -34,6 +34,7 @@ Here is a mimal template to use Flask-Graphite in a project.
 .. code-block:: python
 
     from flask import Flask
+    from flask_graphite import FlaskGraphite
 
     app = Flask(__name__)
     FlaskGraphite(app)
