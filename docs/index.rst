@@ -45,7 +45,6 @@ Summary
 .. toctree::
    :maxdepth: 1
 
-   readme
    installation
    get-started
    configuration
