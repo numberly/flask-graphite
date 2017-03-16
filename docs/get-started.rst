@@ -5,7 +5,7 @@ Get Started
 Example
 -------
 
-Here is a mimal template to use Flask-Graphite in a project.
+Here is a complete example of an application using FlaskGraphite
 
 Write this code in a `test.py` file::
 
@@ -22,9 +22,14 @@ Write this code in a `test.py` file::
     metrics.init_app(app)
 
 
-    @app.route("/")
+    @app.route("/foo")
     def foo():
-        return jsonify({"foo": "bar"})
+        return jsonify({"test": "foo"})
+
+
+    @app.route("/bar")
+    def bar():
+        return jsonify({"test": "bar"})
 
 
     if __name__ == "__main__":
