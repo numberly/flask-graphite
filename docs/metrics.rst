@@ -1,3 +1,5 @@
+.. _`standard metrics`:
+
 ================
 Gathered metrics
 ================

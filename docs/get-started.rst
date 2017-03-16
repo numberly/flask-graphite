@@ -47,14 +47,28 @@ You can launch the server:
 
     $ python test.py
 
-You can then make a request to the server:
+You can then make requests to the server:
 
 .. code-block:: console
 
-    $ curl http://localhost:5000/
+    $ curl http://localhost:5000/foo
+    $ curl http://localhost:5000/bar
 
 By doing this, the `foo` view will be executed, and thanks to the
 Flask-Graphite plugin, a number of metrics will be available.
 
 
 .. _carbon-aggregator: http://graphite.readthedocs.io/en/latest/carbon-daemons.html#carbon-aggregator-py
+
+Generated metrics
+-----------------
+
+When you run this example, the application will send several metrics to your
+local instance of carbon.
+
+You can see these metrics in the directory used by carbon to store the metrics
+(by default ``/var/lib/carbon/whisper/``).
+
+You will see that a different set of metric has been generated for the ``foo``
+and the ``bar`` view. For each of them, you have access to the
+:ref:`standard metrics <standard metrics>`
