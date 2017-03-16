@@ -16,6 +16,16 @@ Welcome to Flask-Graphite's documentation!
 Flask-graphite is an easy-to-use monitoring plugin for Flask. It enables the
 recording of separate metrics for each route of your application.
 
+
+Features
+========
+
+* Send metrics to graphite for each request
+* Metric name based on route of the request
+* Average processing time, number of request, and stats about status code for
+  each route
+
+
 Example
 =======
 
