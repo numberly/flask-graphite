@@ -28,7 +28,7 @@ setup(
     description="Flask-Graphite grant you the power to push useful metrics"
                 " for each route without effort",
     long_description=readme + '\n\n' + history,
-    author="Alexandre Bonnetain",
+    author="Numberly",
     author_email='alexandre.bonnetain@1000mercis.com',
     url='https://github.com/numberly/flask_graphite',
     packages=[

@@ -56,7 +56,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Flask-Graphite'
-copyright = u"2017, Alexandre Bonnetain"
+copyright = u"2017, Numberly"
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
@@ -210,7 +210,7 @@ latex_elements = {
 latex_documents = [
     ('index', 'flask_graphite.tex',
      u'Flask-Graphite Documentation',
-     u'Alexandre Bonnetain', 'manual'),
+     u'Numberly', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at
@@ -241,7 +241,7 @@ latex_documents = [
 man_pages = [
     ('index', 'flask_graphite',
      u'Flask-Graphite Documentation',
-     [u'Alexandre Bonnetain'], 1)
+     [u'Numberly'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -256,7 +256,7 @@ man_pages = [
 texinfo_documents = [
     ('index', 'flask_graphite',
      u'Flask-Graphite Documentation',
-     u'Alexandre Bonnetain',
+     u'Numberly',
      'flask_graphite',
      'One line description of project.',
      'Miscellaneous'),
