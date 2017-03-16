@@ -2,8 +2,8 @@
 Configuring Flask-Graphite
 ==========================
 
-How to configure Flask-Graphite ?
----------------------------------
+How to configure Flask-Graphite?
+--------------------------------
 
 You can configure Flask-Graphite through the application's configuration.
 
