@@ -19,7 +19,7 @@ Write this code in a `test.py` file::
     app.config["FLASK_GRAPHITE_HOST"] = "localhost"
     app.config["FLASK_GRAPHITE_PORT"] = 2023
 
-    metrics.init_app(app)
+    metric_sender.init_app(app)
 
 
     @app.route("/foo")
