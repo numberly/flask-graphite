@@ -2,7 +2,7 @@
 API Reference
 =============
 
-.. automodule:: flask_graphite.flask_graphite
+.. automodule:: flask_graphite
    :members:
 
 .. automodule:: flask_graphite.hooks

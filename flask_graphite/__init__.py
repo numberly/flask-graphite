@@ -3,7 +3,6 @@ import logging
 
 from graphitesend.graphitesend import GraphiteClient
 
-from .flask_graphite import FlaskGraphite
 from .request_hooks import default_hooks
 from .hooks import MetricHook
 
