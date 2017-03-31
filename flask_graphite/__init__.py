@@ -3,7 +3,6 @@ import logging
 
 from graphitesend.graphitesend import GraphiteClient
 
-from .flask_graphite import FlaskGraphite
 from .request_hooks import default_hooks
 from .hooks import MetricHook
 
@@ -44,11 +43,7 @@ class FlaskGraphite(object):
 
         :param app: The application to monitor
         """
-        print("app config:")
-        from pprint import pprint
-        pprint(app.config)
         config = self.config[app] = app.config.get_namespace("FLASK_GRAPHITE_")
-        print("CONFIG:", config)
         config["graphite_server"] = config.pop("host", DEFAULT_HOST)
         config["graphite_port"] = config.pop("port", DEFAULT_PORT)
         config.setdefault("group", DEFAULT_GROUP)

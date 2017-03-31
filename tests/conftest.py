@@ -6,7 +6,7 @@ import pytest
 
 sys.path.insert(0, '.')
 
-from flask_graphite.flask_graphite import FlaskGraphite
+from flask_graphite import FlaskGraphite
 
 mocked_app_methods = ["before_request", "after_request", "teardown_request"]
 

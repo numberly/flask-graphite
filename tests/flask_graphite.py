@@ -2,7 +2,7 @@ import pytest
 
 from graphitesend.graphitesend import GraphiteSendException
 
-from flask_graphite.flask_graphite import (FlaskGraphite, logger, DEFAULT_HOST,
+from flask_graphite import (FlaskGraphite, logger, DEFAULT_HOST,
                                            DEFAULT_PORT, DEFAULT_GROUP)
 
 
