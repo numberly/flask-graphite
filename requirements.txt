@@ -1,2 +1,2 @@
 flask==0.12
-graphitesend==0.7.0
+graphitesend==0.10.0
