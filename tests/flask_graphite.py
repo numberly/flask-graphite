@@ -33,6 +33,7 @@ def test_default_config(app, plugin):
     assert plugin.config[app]["graphite_server"] == DEFAULT_HOST
     assert plugin.config[app]["graphite_port"] == DEFAULT_PORT
     assert plugin.config[app]["group"] == DEFAULT_GROUP
+    assert plugin.config[app]["autoreconnect"] is True
 
 
 def test_config(app, plugin):

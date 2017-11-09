@@ -47,6 +47,7 @@ class FlaskGraphite(object):
         config["graphite_server"] = config.pop("host", DEFAULT_HOST)
         config["graphite_port"] = config.pop("port", DEFAULT_PORT)
         config.setdefault("group", DEFAULT_GROUP)
+        config.setdefault("autoreconnect", True)
 
         logging.info("config: %s", config)
         app.graphite = GraphiteClient(**config)
