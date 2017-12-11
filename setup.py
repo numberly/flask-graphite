@@ -11,7 +11,7 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     "Flask==0.12",
-    "graphitesend==0.7.0"
+    "graphitesend==0.10.0"
 ]
 
 setup_requirements = [
