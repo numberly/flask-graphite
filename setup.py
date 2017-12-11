@@ -24,7 +24,7 @@ test_requirements = [
 
 setup(
     name='flask_graphite',
-    version='0.4.0',
+    version='0.4.1',
     description="Flask-Graphite grant you the power to push useful metrics"
                 " for each route without effort",
     long_description=readme + '\n\n' + history,

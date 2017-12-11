@@ -8,7 +8,7 @@ from .hooks import MetricHook
 
 __author__ = """Numberly"""
 __email__ = 'alexandre.bonnetain@1000mercis.com'
-__version__ = '0.4.0'
+__version__ = '0.4.1'
 
 logger = logging.getLogger("flask-graphite")
 
