@@ -50,7 +50,11 @@ def set_start_time():
 @MetricHook
 def response_size(response):
     """Measure the size of the response body"""
-    data = response.get_data()
+    try:
+        data = response.get_data()
+    except RuntimeError:
+        logger.warning("Couldn't get response size")
+        return
     return "size", len(data)
 
 
