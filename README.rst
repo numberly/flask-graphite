@@ -29,3 +29,17 @@ Features
 * Metric name based on route of the request
 * Average processing time, number of request, and stats about status code for
   each route
+
+
+Example
+-------
+
+Here is a mimal template to use Flask-Graphite in a project.
+
+.. code-block:: python
+
+    from flask import Flask
+    from flask_graphite import FlaskGraphite
+
+    app = Flask(__name__)
+    FlaskGraphite(app)
