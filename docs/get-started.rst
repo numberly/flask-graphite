@@ -2,8 +2,8 @@
 Get Started
 ===========
 
-Example
--------
+Complete example
+----------------
 
 Here is a complete example of an application using FlaskGraphite
 
@@ -55,7 +55,8 @@ You can then make requests to the server:
     $ curl http://localhost:5000/bar
 
 By doing this, the `foo` view will be executed, and thanks to the
-Flask-Graphite plugin, a number of metrics will be available.
+Flask-Graphite plugin, a number of metrics will be available on your graphite
+server.
 
 
 .. _carbon-aggregator: http://graphite.readthedocs.io/en/latest/carbon-daemons.html#carbon-aggregator-py

@@ -5,9 +5,9 @@ Configuring Flask-Graphite
 How to configure Flask-Graphite?
 --------------------------------
 
-You can configure Flask-Graphite through the application's configuration.
+You can configure Flask-Graphite through the Flask application's configuration.
 
-The ``FLASK_GRAPHITE_`` namespace will be fetched for the application's
+The ``FLASK_GRAPHITE_`` namespace will be fetched from the application's
 configuration and used as Flask-Graphite own configuration.
 
 Configuration keys
@@ -32,9 +32,5 @@ NAME              Default        Description
 
 Only the most commons are given here. In fact, any parameters accepted by
 `the graphitesend client`_ is also valid.
-
-We strongly encourage you to set the ``GROUP`` option to separate the
-flask-graphite metrics from others.
-
 
 .. _`the graphitesend client`: https://github.com/daniellawrence/graphitesend

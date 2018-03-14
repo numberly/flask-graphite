@@ -1,6 +1,6 @@
-===============================
+==============
 Flask-Graphite
-===============================
+==============
 
 
 .. image:: https://img.shields.io/pypi/v/flask_graphite.svg
