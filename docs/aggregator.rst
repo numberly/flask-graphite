@@ -29,3 +29,7 @@ averaged. Below is a list of aggregation suitable for a simple environment.
     <route>.pt (60) = avg <<route>>.pt
     <route>.size (60) = avg <<route>>.size
 
+You can consult the `carbon documentation`_ for more informations on the
+syntax.
+
+.. _`carbon documentation`: https://graphite.readthedocs.io/en/latest/config-carbon.html#aggregation-rules-conf
