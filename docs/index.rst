@@ -48,6 +48,7 @@ Summary
 
    installation
    get-started
+   aggregator
    configuration
    metrics
    reference
