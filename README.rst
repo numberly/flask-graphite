@@ -34,7 +34,7 @@ Features
 Example
 -------
 
-Here is a mimal template to use Flask-Graphite in a project.
+Here is a minimal template to use Flask-Graphite in a project.
 
 .. code-block:: python
 
