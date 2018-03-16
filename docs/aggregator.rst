@@ -1,3 +1,5 @@
+.. _`aggregator`:
+
 Carbon aggregator
 #################
 

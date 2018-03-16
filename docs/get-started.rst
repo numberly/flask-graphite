@@ -38,9 +38,6 @@ Write this code in a `test.py` file::
 Run this example
 ----------------
 
-To run this example, you will need to run carbon-aggregator_ in local on port
-2023.
-
 You can launch the server:
 
 .. code-block:: console
@@ -58,8 +55,8 @@ By doing this, the `foo` view will be executed, and thanks to the
 Flask-Graphite plugin, a number of metrics will be available on your graphite
 server.
 
-
-.. _carbon-aggregator: http://graphite.readthedocs.io/en/latest/carbon-daemons.html#carbon-aggregator-py
+.. warning::
+    A running instance of carbon-aggregator is needed. See :ref:`aggregator`
 
 Generated metrics
 -----------------
