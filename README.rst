@@ -43,3 +43,9 @@ Here is a minimal template to use Flask-Graphite in a project.
 
     app = Flask(__name__)
     FlaskGraphite(app)
+
+Such a simple snippet, combined with a Grafana dashboard, would give you
+something like this:
+
+.. image:: artwork/grafana_dashboard.png
+    :alt: An example dashboard powered with Flask-Graphite
