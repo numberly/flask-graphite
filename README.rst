@@ -14,8 +14,8 @@ Flask-Graphite
         :alt: Documentation Status
 
 
-Flask-Graphite grant you the power to push useful metrics for each request
-without efforts
+Flask-Graphite grants you the power to push useful metrics for each request
+without effort
 
 
 * Free software: BSD license
@@ -26,8 +26,8 @@ Features
 --------
 
 * Send metrics to graphite for each request
-* Metric name based on route of the request
-* Average processing time, number of request, and stats about status code for
+* Metric name based on the route of the request
+* Average processing time, number of requests, and stats about status code for
   each route
 
 

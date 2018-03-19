@@ -22,7 +22,7 @@ NAME              Default        Description
 ``HOST``          localhost      The host of the carbon-aggregator installation.
 ``PORT``          2023           The port of the carbon-aggregator installation.
 ``PREFIX``                       A prefix that will be prepended to all metrics.
-``GROUP``         flask-graphite A string that will be added between the host and the actual.
+``GROUP``         flask-graphite A string that will be added between the host and the actual
                                  metric name to generate the complete metric name.
 ``DEBUG``                        Enable debug flag on graphitesend.
 ``SYSTEM_NAME``                  The name of the system which sends the metrics (hostname).
