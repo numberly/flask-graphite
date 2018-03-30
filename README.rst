@@ -1,6 +1,6 @@
-===============================
+==============
 Flask-Graphite
-===============================
+==============
 
 
 .. image:: https://img.shields.io/pypi/v/flask_graphite.svg
@@ -14,8 +14,8 @@ Flask-Graphite
         :alt: Documentation Status
 
 
-Flask-Graphite grant you the power to push useful metrics for each route
-without efforts
+Flask-Graphite grants you the power to push useful metrics for each request
+without effort
 
 
 * Free software: BSD license
@@ -26,6 +26,26 @@ Features
 --------
 
 * Send metrics to graphite for each request
-* Metric name based on route of the request
-* Average processing time, number of request, and stats about status code for
+* Metric name based on the route of the request
+* Average processing time, number of requests, and stats about status code for
   each route
+
+
+Example
+-------
+
+Here is a minimal template to use Flask-Graphite in a project.
+
+.. code-block:: python
+
+    from flask import Flask
+    from flask_graphite import FlaskGraphite
+
+    app = Flask(__name__)
+    FlaskGraphite(app)
+
+Such a simple snippet, combined with a Grafana dashboard, would give you
+something like this:
+
+.. image:: artwork/grafana_dashboard.png
+    :alt: An example dashboard powered with Flask-Graphite

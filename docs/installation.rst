@@ -14,7 +14,7 @@ To install Flask-Graphite, run this command in your terminal:
 
     $ pip install flask_graphite
 
-This is the preferred method to install Flask-Graphite, as it will always install the most recent stable release. 
+This is the preferred method to install Flask-Graphite, as it will always install the most recent stable release.
 
 If you don't have `pip`_ installed, this `Python installation guide`_ can guide
 you through the process.
@@ -26,7 +26,7 @@ you through the process.
 From sources
 ------------
 
-The sources for Flask-Graphite can be downloaded from the `Github repo`_.
+The sources for Flask-Graphite can be downloaded from the `Github repository`_.
 
 You can either clone the public repository:
 
@@ -47,5 +47,5 @@ Once you have a copy of the source, you can install it with:
     $ python setup.py install
 
 
-.. _Github repo: https://github.com/numberly/flask_graphite
+.. _Github repository: https://github.com/numberly/flask_graphite
 .. _tarball: https://github.com/numberly/flask_graphite/tarball/master

@@ -20,7 +20,7 @@ DEFAULT_GROUP = "flask-graphite"
 class FlaskGraphite(object):
     """Register a list of hooks meant to monitor a flask application
 
-    The configuration is read from the namespace "FLASK_GRAPHITE_" of the
+    The configuration is read from the namespace `FLASK_GRAPHITE_` of the
     application configuration.
 
     The main options are:
