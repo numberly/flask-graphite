@@ -4,8 +4,8 @@ from flask_graphite.utils import get_request_metric_prefix
 
 URI_to_metric = {
     "/test": "test",
-    "/foo/bar": "foo_bar",
-    "/foo/bar/42": "foo_bar_baz"
+    "/foo/bar": "foo|bar",
+    "/foo/bar/42": "foo|bar|baz"
 }
 
 
