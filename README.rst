@@ -16,9 +16,7 @@ Flask-Graphite
 Flask-Graphite grants you the power to push useful metrics for each request
 without effort
 
-
-* Free software: BSD license
-* Documentation: https://flask-graphite.readthedocs.io.
+Documentation: https://flask-graphite.readthedocs.io.
 
 
 Features
