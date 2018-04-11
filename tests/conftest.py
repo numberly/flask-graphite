@@ -1,10 +1,6 @@
-import sys
-
 import flask
 import graphitesend.graphitesend
 import pytest
-
-sys.path.insert(0, '.')
 
 from flask_graphite import FlaskGraphite
 

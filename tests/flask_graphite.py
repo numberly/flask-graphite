@@ -2,8 +2,8 @@ import pytest
 
 from graphitesend.graphitesend import GraphiteSendException
 
-from flask_graphite import (FlaskGraphite, logger, DEFAULT_HOST,
-                                           DEFAULT_PORT, DEFAULT_GROUP)
+from flask_graphite import (DEFAULT_GROUP, DEFAULT_HOST, DEFAULT_PORT,
+                            FlaskGraphite, logger)
 
 
 @pytest.fixture
@@ -27,7 +27,7 @@ def test_init_failed(mocker, app, plugin):
 
 
 def test_default_config(app, plugin):
-    app.config["FLASK_GRAPHITE_DRYRUN"] = True # To not raise error
+    app.config["FLASK_GRAPHITE_DRYRUN"] = True  # To not raise error
     plugin.init_app(app)
     assert app in plugin.config
     assert plugin.config[app]["graphite_server"] == DEFAULT_HOST
@@ -44,7 +44,7 @@ def test_config(app, plugin):
     assert app in plugin.config
     assert plugin.config[app]["graphite_server"] == "google.com"
     assert plugin.config[app]["graphite_port"] == 1337
-    assert plugin.config[app]["dryrun"] == True
+    assert plugin.config[app]["dryrun"] is True
 
 
 def test_setup_graphitesend(app, plugin):
