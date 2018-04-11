@@ -3,8 +3,8 @@ Flask-Graphite
 ==============
 
 
-.. image:: https://img.shields.io/pypi/v/flask_graphite.svg
-        :target: https://pypi.python.org/pypi/flask_graphite
+.. image:: https://img.shields.io/pypi/v/flask-graphite.svg
+        :target: https://pypi.python.org/pypi/flask-graphite
 .. image:: https://img.shields.io/github/license/numberly/flask-graphite.svg
         :target: https://github.com/numberly/flask-graphite/blob/master/LICENSE
 .. image:: https://img.shields.io/travis/numberly/flask-graphite.svg

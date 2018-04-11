@@ -6,10 +6,6 @@ from graphitesend.graphitesend import GraphiteClient
 from .request_hooks import default_hooks
 from .hooks import MetricHook
 
-__author__ = """Numberly"""
-__email__ = 'alexandre.bonnetain@1000mercis.com'
-__version__ = '0.4.2'
-
 logger = logging.getLogger("flask-graphite")
 
 DEFAULT_HOST = "localhost"

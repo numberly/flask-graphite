@@ -1,2 +1,8 @@
-flask==0.12
-graphitesend==0.10.0
+flask
+graphitesend
+
+pytest
+pytest-cov
+pytest-mock
+
+Sphinx
