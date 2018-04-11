@@ -52,7 +52,7 @@ def response_size(response):
     """Measure the size of the response body"""
     try:
         data = response.get_data()
-    except RuntimeError:
+    except RuntimeError:  # pragma: no cover
         logger.warning("Couldn't get response size")
         return
     return "size", len(data)
