@@ -5,10 +5,10 @@ Flask-Graphite
 
 .. image:: https://img.shields.io/pypi/v/flask_graphite.svg
         :target: https://pypi.python.org/pypi/flask_graphite
-.. image:: https://img.shields.io/github/license/numberly/mongo-thingy.svg
-        :target: https://github.com/numberly/mongo-thingy/blob/master/LICENSE
-.. image:: https://img.shields.io/travis/numberly/flask_graphite.svg
-        :target: https://travis-ci.org/numberly/flask_graphite
+.. image:: https://img.shields.io/github/license/numberly/flask-graphite.svg
+        :target: https://github.com/numberly/flask-graphite/blob/master/LICENSE
+.. image:: https://img.shields.io/travis/numberly/flask-graphite.svg
+        :target: https://travis-ci.org/numberly/flask-graphite
 .. image:: https://readthedocs.org/projects/flask-graphite/badge/?version=latest
         :target: https://flask-graphite.readthedocs.io/en/latest/?badge=latest
 
