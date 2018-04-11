@@ -8,7 +8,7 @@ def get_description():
 
 setup(
     name='Flask-Graphite',
-    version='0.4.2',
+    version='0.5.0',
     url='https://github.com/numberly/flask-graphite',
     license='MIT',
     description="Push useful metrics for each request without effort!",
