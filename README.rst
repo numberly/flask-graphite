@@ -1,7 +1,6 @@
-==============
-Flask-Graphite
-==============
+.. image:: https://raw.githubusercontent.com/numberly/flask-graphite/master/artwork/flask-graphite.png
 
+|
 
 .. image:: https://img.shields.io/pypi/v/flask-graphite.svg
         :target: https://pypi.python.org/pypi/flask-graphite
@@ -12,6 +11,7 @@ Flask-Graphite
 .. image:: https://readthedocs.org/projects/flask-graphite/badge/?version=latest
         :target: https://flask-graphite.readthedocs.io/en/latest/?badge=latest
 
+|
 
 Flask-Graphite grants you the power to push useful metrics for each request
 without effort

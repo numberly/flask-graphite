@@ -41,7 +41,20 @@ html_theme = 'alabaster'
 templates_path = ['_templates']
 
 html_sidebars = {
+    'index': [
+        'about.html',
+        'navigation.html',
+        'relations.html',  # needs 'show_related': True theme option to display
+        'searchbox.html',
+        'donate.html',
+        'github-corners.html'
+    ],
     '**': [
+        'sidebarlogo.html',
+        'navigation.html',
+        'relations.html',  # needs 'show_related': True theme option to display
+        'searchbox.html',
+        'donate.html',
         'github-corners.html'
     ]
 }
