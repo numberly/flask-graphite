@@ -1,3 +1,5 @@
+import logging
+
 import pytest
 
 from flask_graphite import (DEFAULT_GROUP, DEFAULT_HOST, DEFAULT_PORT,
@@ -18,6 +20,7 @@ def test_init_app(app, plugin):
 
 
 def test_init_failed(caplog, app, plugin):
+    caplog.set_level(logging.ERROR)
     app.config["FLASK_GRAPHITE_DRYRUN"] = False
     plugin.init_app(app)
     assert len(caplog.records) == 1

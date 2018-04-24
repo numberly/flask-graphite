@@ -1,7 +1,7 @@
 flask
 graphitesend
 
-pytest
+pytest>=3.3  # we need caplog
 pytest-cov
 pytest-mock
 
