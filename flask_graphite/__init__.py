@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from graphitesend.graphitesend import GraphiteClient
+from graphitesend.graphitesend import GraphiteClient, GraphiteSendException
 
 from .request_hooks import default_hooks
 from .hooks import MetricHook
@@ -46,12 +46,15 @@ class FlaskGraphite(object):
         config.setdefault("autoreconnect", True)
 
         logging.info("config: %s", config)
-        app.graphite = GraphiteClient(**config)
-        logging.info("graphite client instantiated with config: %s",
-                     config)
-
-        for hook in default_hooks:
-            hook.register_into(app)
+        try:
+            app.graphite = GraphiteClient(**config)
+        except GraphiteSendException as e:
+            logging.error("can't instanciate graphite client: {}".format(e))
+        else:
+            logging.info("graphite client instantiated with config: %s",
+                         config)
+            for hook in default_hooks:
+                hook.register_into(app)
 
 
 __all__ = ["FlaskGraphite", "default_hooks", "MetricHook"]

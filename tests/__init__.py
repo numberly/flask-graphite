@@ -1,9 +1,7 @@
 import pytest
 
-from graphitesend.graphitesend import GraphiteSendException
-
 from flask_graphite import (DEFAULT_GROUP, DEFAULT_HOST, DEFAULT_PORT,
-                            FlaskGraphite, logger)
+                            FlaskGraphite)
 
 
 @pytest.fixture
@@ -19,11 +17,11 @@ def test_init_app(app, plugin):
     plugin.init_app(app)
 
 
-def test_init_failed(mocker, app, plugin):
-    mocker.patch.object(logger, "error")
+def test_init_failed(caplog, app, plugin):
     app.config["FLASK_GRAPHITE_DRYRUN"] = False
-    with pytest.raises(GraphiteSendException):
-        plugin.init_app(app)
+    plugin.init_app(app)
+    assert len(caplog.records) == 1
+    assert caplog.records[0].levelname == "ERROR"
 
 
 def test_default_config(app, plugin):
