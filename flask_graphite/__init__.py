@@ -45,16 +45,16 @@ class FlaskGraphite(object):
         config.setdefault("group", DEFAULT_GROUP)
         config.setdefault("autoreconnect", True)
 
-        logging.info("config: %s", config)
+        logger.info("config: {}".format(config))
         try:
             app.graphite = GraphiteClient(**config)
         except GraphiteSendException as e:
-            logging.error("can't instanciate graphite client: {}".format(e))
+            logger.error("can't instanciate graphite client: {}".format(e))
         else:
-            logging.info("graphite client instantiated with config: %s",
-                         config)
+            logger.info("graphite client instantiated with config: %s",
+                        config)
             for hook in default_hooks:
                 hook.register_into(app)
-
+        pass
 
 __all__ = ["FlaskGraphite", "default_hooks", "MetricHook"]
