@@ -55,7 +55,6 @@ class FlaskGraphite(object):
                         config)
             for hook in default_hooks:
                 hook.register_into(app)
-        pass
 
 
 __all__ = ["FlaskGraphite", "default_hooks", "MetricHook"]
