@@ -8,10 +8,6 @@ from .request_hooks import default_hooks
 
 logger = logging.getLogger("flask-graphite")
 
-DEFAULT_HOST = "localhost"
-DEFAULT_PORT = 2023
-DEFAULT_GROUP = "flask-graphite"
-
 
 class FlaskGraphite(object):
     """Register a list of hooks meant to monitor a flask application
@@ -30,7 +26,6 @@ class FlaskGraphite(object):
     """
 
     def __init__(self, app=None):
-        self.config = {}
         if app is not None:
             self.init_app(app)
 
@@ -39,12 +34,12 @@ class FlaskGraphite(object):
 
         :param app: The application to monitor
         """
-        config = self.config[app] = app.config.get_namespace("FLASK_GRAPHITE_")
+        config = app.config.get_namespace("FLASK_GRAPHITE_")
         logger.info("config: {}".format(config))
 
-        config["graphite_server"] = config.pop("host", DEFAULT_HOST)
-        config["graphite_port"] = config.pop("port", DEFAULT_PORT)
-        config.setdefault("group", DEFAULT_GROUP)
+        config["graphite_server"] = config.pop("host", "localhost")
+        config["graphite_port"] = config.pop("port", 2023)
+        config.setdefault("group", "flask-graphite")
         config.setdefault("autoreconnect", True)
         try:
             app.graphite = GraphiteClient(**config)
