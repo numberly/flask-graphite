@@ -24,6 +24,7 @@ NAME                               Default        Description
 ``FLASK_GRAPHITE_PREFIX``                         A prefix that will be prepended to all metrics.
 ``FLASK_GRAPHITE_GROUP``           flask-graphite A string that will be added between the host and the actual metric name to generate the complete metric name.
 ``FLASK_GRAPHITE_AUTORECONNECT``   True           Automatically try to reconnect to graphite server.
+``FLASK_GRAPHITE_METRIC_TEMPLATE`` url_rule       The Flask ``request``'s attribute that should be used to generate the metric name.
 ================================== ============== =============================================================================================================
 
 .. hint::

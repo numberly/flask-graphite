@@ -41,6 +41,7 @@ class FlaskGraphite(object):
         config["graphite_port"] = config.pop("port", 2023)
         config.setdefault("group", "flask-graphite")
         config.setdefault("autoreconnect", True)
+        config.pop("metric_template", None)
         try:
             app.graphite = GraphiteClient(**config)
         except GraphiteSendException as e:
