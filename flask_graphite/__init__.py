@@ -40,12 +40,12 @@ class FlaskGraphite(object):
         :param app: The application to monitor
         """
         config = self.config[app] = app.config.get_namespace("FLASK_GRAPHITE_")
+        logger.info("config: {}".format(config))
+
         config["graphite_server"] = config.pop("host", DEFAULT_HOST)
         config["graphite_port"] = config.pop("port", DEFAULT_PORT)
         config.setdefault("group", DEFAULT_GROUP)
         config.setdefault("autoreconnect", True)
-
-        logger.info("config: {}".format(config))
         try:
             app.graphite = GraphiteClient(**config)
         except GraphiteSendException as e:
