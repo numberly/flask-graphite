@@ -1,5 +1,5 @@
-from flask import Response
 import pytest
+from flask import Response
 
 from flask_graphite.request_hooks import default_hooks, request_status_type
 

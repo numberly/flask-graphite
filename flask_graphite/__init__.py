@@ -3,8 +3,8 @@ import logging
 
 from graphitesend.graphitesend import GraphiteClient, GraphiteSendException
 
-from .request_hooks import default_hooks
 from .hooks import MetricHook
+from .request_hooks import default_hooks
 
 logger = logging.getLogger("flask-graphite")
 
