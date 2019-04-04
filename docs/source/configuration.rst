@@ -13,24 +13,21 @@ configuration and used as Flask-Graphite own configuration.
 Configuration keys
 ------------------
 
-Here is a succint list of the different options available, and their respective
-meanings. The prefix ``FLASK_GRAPHITE_`` is removed for readability.
+Here is a succinct list of different options available, and their respective
+meanings.
 
-================= ============== ============================================================
-NAME              Default        Description
-================= ============== ============================================================
-``HOST``          localhost      The host of the carbon-aggregator installation.
-``PORT``          2023           The port of the carbon-aggregator installation.
-``PREFIX``                       A prefix that will be prepended to all metrics.
-``GROUP``         flask-graphite A string that will be added between the host and the actual
-                                 metric name to generate the complete metric name.
-``DEBUG``                        Enable debug flag on graphitesend.
-``SYSTEM_NAME``                  The name of the system which sends the metrics (hostname).
-``SUFFIX``                       A suffix appended to the end of the metric.
-``AUTORECONNECT`` True           Automatically try to reconnect to graphite server.
-================= ============== ============================================================
+================================== ============== =============================================================================================================
+NAME                               Default        Description
+================================== ============== =============================================================================================================
+``FLASK_GRAPHITE_HOST``            localhost      The host of the carbon-aggregator installation.
+``FLASK_GRAPHITE_PORT``            2023           The port of the carbon-aggregator installation.
+``FLASK_GRAPHITE_PREFIX``                         A prefix that will be prepended to all metrics.
+``FLASK_GRAPHITE_GROUP``           flask-graphite A string that will be added between the host and the actual metric name to generate the complete metric name.
+``FLASK_GRAPHITE_AUTORECONNECT``   True           Automatically try to reconnect to graphite server.
+================================== ============== =============================================================================================================
 
-Only the most commons are given here. In fact, any parameters accepted by
-`the graphitesend client`_ is also valid.
+.. hint::
+   Any parameter accepted by `the graphitesend client`_ is also valid when
+   prefixed with ``FLASK_GRAPHITE_``.
 
 .. _`the graphitesend client`: https://github.com/daniellawrence/graphitesend
