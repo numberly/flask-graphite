@@ -1,5 +1,5 @@
 import flask
-import graphitesend.graphitesend
+import graphitesend
 import pytest
 
 from flask_graphite import FlaskGraphite
@@ -30,6 +30,6 @@ def mocked_app(mocker, plugged_app):
 
 @pytest.fixture
 def graphitesend_client(mocker):
-    client = graphitesend.graphitesend.GraphiteClient(dryrun=True)
+    client = graphitesend.GraphiteClient(dryrun=True)
     mocker.patch.object(client, "send")
     return client
