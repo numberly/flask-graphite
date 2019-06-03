@@ -21,7 +21,7 @@ setup(
     platform='any',
     install_requires=[
         'Flask>=0.12',
-        'graphitesend>=0.10.0'
+        'graphitesender>=0.11.2'
     ],
     classifiers=[
         'Environment :: Web Environment',

@@ -28,7 +28,7 @@ NAME                               Default        Description
 ================================== ============== =============================================================================================================
 
 .. hint::
-   Any parameter accepted by `the graphitesend client`_ is also valid when
+   Any parameter accepted by `the graphitesender client`_ is also valid when
    prefixed with ``FLASK_GRAPHITE_``.
 
-.. _`the graphitesend client`: https://github.com/daniellawrence/graphitesend
+.. _`the graphitesender client`: https://github.com/Shir0kamii/graphitesender

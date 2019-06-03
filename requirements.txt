@@ -1,5 +1,5 @@
 flask
-graphitesend
+graphitesender
 
 flake8
 flake8-isort

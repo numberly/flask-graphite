@@ -1,7 +1,7 @@
 import logging
 
 from flask import current_app
-from graphitesend.graphitesend import GraphiteSendException
+from graphitesend import GraphiteSendException
 
 from .utils import get_request_metric_prefix
 
